@@ -26,6 +26,9 @@ def test_two_disjoint():
 def test_three_two_disjoint():
     assert_equals(is_connected([[1, 2], [3, 4], [1, 6]]), False)
 
+def test_forked():
+    assert_equals(is_connected([[1, 2], [1, 3], [3, 4]]), True)
+
 def test_long_chain():
     input_list = [[1, 2], [2, 3], [3, 4], [4, 5], [5, 6]]
     assert_equals(is_connected(input_list), True)
