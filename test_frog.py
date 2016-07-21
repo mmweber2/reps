@@ -31,3 +31,9 @@ def test_three_steps_one_jump():
 def test_three_steps_two_jumps():
     assert_equals(frog(3, 2), 3)
 
+import mock
+@mock.patch('frog.frog')
+def test_caching(frog_mock):
+    frog_mock.side_effect = frog
+    assert_equals(frog(4, 2), 5)
+    assert_equals(frog_mock.call_count, 6)
