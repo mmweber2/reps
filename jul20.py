@@ -51,11 +51,3 @@ def frog(steps, jumps, cache=None):
     partial_result = sum(frog(steps-x, jumps) for x in xrange(1, jumps + 1))
     cache[steps] = partial_result
     return partial_result
-
-5, 2
-
-4: call 1: sum(frog(3), frog(2))
-3: call 2: sum(frog(2), frog(1))
-2: call 3: sum(frog(1), frog(0))
-1: call 4: (return)
-0: call 5: (return)
