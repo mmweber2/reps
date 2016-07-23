@@ -19,9 +19,4 @@ def connected_components(edges):
         # Don't consider edges in this component next time
         remaining_edges = [x for x in remaining_edges if x not in seen]
         components.append(list(seen))
-    return len(components)
-
-
-
-
-
+    return len(components) # or return components
