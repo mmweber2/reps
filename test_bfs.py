@@ -1,6 +1,5 @@
 from bfs import bfs
-from bfs import Tree
-import mock
+from tree import Tree
 from nose.tools import assert_equals
 def test_empty():
     assert not bfs(None, 3)

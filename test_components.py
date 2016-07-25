@@ -38,5 +38,3 @@ def test_long_chain():
 def test_three_components():
     input_list = [[1, 2], [7, 8], [3, 2], [4, 5], [5, 6]]
     assert_equals(comp(input_list), 3)
-
-
