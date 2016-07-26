@@ -25,4 +25,17 @@ def perms_inner(input_string, pos=0):
             perms.append(partials[i][:j] + current_char + partials[i][j:])
     return perms
 
+# Alternate version that modifies the string and returns a list
+def perms_partial(input_string):
+    if len(input_string) <= 1:
+        return [input_string]
+    partials = perms_partial(input_string[1:])
+    current_char = input_string[0]
+    perms = []
+    for i in xrange(len(partials)):
+        for j in xrange(len(partials[i])+1):
+            perms.append(partials[i][:j] + current_char + partials[i][j:])
+    return perms
+
+
 
