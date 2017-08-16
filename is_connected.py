@@ -1,19 +1,17 @@
 from collections import defaultdict
 
 def is_connected(edges):
-    if edges == []:
-        return True
-    connected_to = defaultdict(list)
-    for edge in edges:
-        connected_to[edge[0]].append(edge[1])
-        connected_to[edge[1]].append(edge[0])
+    if not edges:
+        return True # or False, depending on specification
+    graph = defaultdict(list)
+    for start, end in edges:
+        graph[start].append(end)
+        graph[end].append(start)
+    # Initialize queue with arbitrary edge
     queue = [edges[0][0]]
     seen = set()
-    while len(queue) > 0:
+    while queue:
         current = queue.pop(0)
-        new_edges = [x for x in connected_to[current] if x not in seen]
-        queue.extend(new_edges)
-        seen.update(new_edges)
-    if len(seen) < len(connected_to):
-        return False
-    return True
+        queue.extend(x for x in graph[current] if x not in seen)
+        seen.update(graph[current])
+    return len(seen) == len(connected_to)
