@@ -44,5 +44,5 @@ def count_components(edges):
             seen.update(connections[current])
         # Don't consider edges in this component next time
         remaining_vertices = [x for x in remaining_vertices if x not in seen]
-        components += len(seen)
+        components += 1
     return components
