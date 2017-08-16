@@ -1,22 +1,48 @@
+# Given a list of edges, return a list of connected components.
+
 from collections import defaultdict
-def connected_components(edges):
+def get_components(edges):
     connections = defaultdict(list)
-    for edge in edges:
-        connections[edge[0]].append(edge[1])
-        connections[edge[1]].append(edge[0])
+    for start, end in edges:
+        connections[start].append(end)
+        connections[end].append(start)
     components = []
-    # Track unvisited edges in a list for easy iteration and modification
-    remaining_edges = list(connections)
-    while len(remaining_edges) > 0:
-        queue = [remaining_edges.pop()]
+    # Track unvisited vertices in a list for easy iteration and modification
+    remaining_vertices = list(connections)
+    while remaining_vertices:
+        queue = [remaining_vertices.pop()]
         seen = set()
-        while len(queue) > 0:
+        while queue:
             current = queue.pop()
+            # Optional, but avoids extra traversals
             seen.add(current)
-            new_edges = [x for x in connections[current] if x not in seen]
-            seen.update(new_edges)
-            queue.extend(new_edges)
+            queue.extend(x for x in connections[current] if x not in seen)
+            seen.update(connections[current])
         # Don't consider edges in this component next time
-        remaining_edges = [x for x in remaining_edges if x not in seen]
+        remaining_vertices = [x for x in remaining_vertices if x not in seen]
         components.append(list(seen))
-    return len(components) # or return components
+    return components
+
+# Alternate version:
+# Given a list of edges, count the number of connected components.
+def count_components(edges):
+    connections = defaultdict(list)
+    for start, end in edges:
+        connections[start].append(end)
+        connections[end].append(start)
+    count = 0
+    # Track unvisited vertices in a list for easy iteration and modification
+    remaining_vertices = list(connections)
+    while remaining_vertices:
+        queue = [remaining_vertices.pop()]
+        seen = set()
+        while queue:
+            current = queue.pop()
+            # Optional, but avoids extra traversals
+            seen.add(current)
+            queue.extend(x for x in connections[current] if x not in seen)
+            seen.update(connections[current])
+        # Don't consider edges in this component next time
+        remaining_vertices = [x for x in remaining_vertices if x not in seen]
+        components += len(seen)
+    return components
