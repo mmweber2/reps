@@ -13,24 +13,26 @@ Output: An array of length 26 where index 0 indicates the frequency of letter a 
   an integer, index 1 for letter b, index 25 for letter z, etc.
 ''' 
 def parse_encoded(encoded_string):
-    # There may not be any parens in s, but this will make them easier to manage otherwise
+    # There may not be any parens in s, but this will make them easier to manage
     sections = encoded_string.split(")")
     freqs = [0] * 26
     for section in sections:
         # Current position (index) in section
         pos = 0
-        # -1 to account for 'a' being at index 0 with an id of 1
-        letter_id = int(section[pos]) - 1
-        if pos + 2 < len(section) and section[pos + 2] == "#":
-            letter_id = int(section[pos:pos+2]) - 1
-            # Don't run the loop from the # symbol
-            pos += 3
-        if pos + 1 < len(section) and section[pos + 1] == "(":
-            pos += 2
-            # pos to end of section should be the contents of the parentheses
-            freqs[letter_id] += int(section[pos:])
-        else:
-            # No count follows this number
+        while pos < len(section):
+            # -1 to account for 'a' being at index 0 with an id of 1
+            letter_id = int(section[pos]) - 1
+            if pos + 2 < len(section) and section[pos + 2] == "#":
+                letter_id = int(section[pos:pos+2]) - 1
+                # The # sign is the end of this letter, so move there
+                pos += 2
+            if pos + 1 < len(section) and section[pos + 1] == "(":
+                # pos to end of section should be the contents of the parentheses
+                freqs[letter_id] += int(section[pos:])
+                # Since the section breaks on ")", this is the end of the section,
+                #    so break out of the while loop and avoid duplicate additions
+                #    of this letter
+                break
             pos += 1
             freqs[letter_id] += 1
     return freqs
