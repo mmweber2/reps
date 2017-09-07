@@ -30,3 +30,8 @@ def test_three_items_sorted_present():
     li = [0, 1, 5]
     assert_equals(bsearchi(li, 1), 1)
     assert_equals(bsearchr(li, 1), 1)
+
+def test_with_string():
+    li = [-1, 0, 2]
+    assert_equals(bsearchi(li, "test"), -1)
+    assert_equals(bsearchr(li, "test"), -1)
