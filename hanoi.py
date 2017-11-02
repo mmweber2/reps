@@ -18,12 +18,12 @@ class Tower(object):
         # Move the discs from the temp to the destination
         temp.move_discs(n - 1, dest, self)
 
-def solve():
-    n = 3
-    towers = [Tower() for i in xrange(n)]
+def solve(num_discs):
+    towers = [Tower() for i in xrange(3)]
     # Put all the discs on the first tower to start
-    towers[0].discs = range(n-1, -1, -1) 
+    towers[0].discs = range(num_discs-1, -1, -1) 
     # Move everything from tower 0 to tower 2, with tower 1 as buffer
-    towers[0].move_discs(n, towers[2], towers[1])
+    towers[0].move_discs(num_discs, towers[2], towers[1])
+    return towers
 
 
