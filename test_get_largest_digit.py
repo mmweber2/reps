@@ -15,4 +15,8 @@ def test_all_digits():
 
 def test_large_numbers():
     assert_equals(get_largest_digit(2**32, 2**32), 9)
+
+# It is given that both input numbers are positive, so I don't
+#   test that case. Otherwise, I would add an assert_raises test
+#   for a ValueError.
     
