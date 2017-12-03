@@ -7,11 +7,14 @@ if __name__ == "__main__":
     t = int(raw_input().strip())
     for _ in xrange(t):
         a, b, x = map(int, raw_input().strip().split())
-        # How many players are there before we reach player b / 2?
-        set_size = min(b - a + 1, (b + 1) / 2)
-        if x > set_size:
-            # Not enough players in this range
-            print -1
-        else:
-            # Print the last x players
-            print " ".join(str(player) for player in xrange(b, b - x, -1))
+        find_players(a, b, x)
+
+def find_players(start, end, num_players):
+    # How many players are there before we reach player (end / 2)?
+    set_size = min(end - start + 1, (end + 1) / 2)
+    if num_players > set_size:
+        # Not enough players in this range
+        print -1
+    else:
+        # Print the last num_players players
+        print " ".join(str(x) for x in xrange(end, end - num_players, -1))
